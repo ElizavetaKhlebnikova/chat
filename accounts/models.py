@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.core.validators import RegexValidator
 from django.utils import timezone
+from .manager import MyUserManager
 
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
@@ -14,6 +15,9 @@ class User(AbstractBaseUser):
                                     max_length=12,
                                     null=True,
                                     blank=True)
+
+    # добавляем кастомный менеджер
+    objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
