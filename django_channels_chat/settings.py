@@ -126,3 +126,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # указываем кастомную модель пользователя
 AUTH_USER_MODEL = 'accounts.User'
+# редирект после успешной авторизации
+LOGIN_REDIRECT_URL = '/'
