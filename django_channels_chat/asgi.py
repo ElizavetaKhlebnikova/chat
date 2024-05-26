@@ -8,9 +8,15 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
 """
 
 import os
-
+from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
+from django_channels_chat.chat import routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_channels_chat.settings')
 
-application = get_asgi_application()
+asgi_application = get_asgi_application()
+
+application = ProtocolTypeRouter({
+    "http": asgi_application,
+    "websocket": URLRouter(routing.websocket_urlpatterns)
+})
